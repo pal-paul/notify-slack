@@ -1,0 +1,20 @@
+name: "notify-slack"
+description: "notify-slack action"
+inputs:
+  status:
+    description: "The status of the job"
+    required: true
+    default: "success"
+  notify_when:
+    description: "When to notify"
+    required: true
+    default: "always"
+  slack_token:
+    description: "Slack token"
+    required: true
+  slack_channel:
+    description: "Slack channel"
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
