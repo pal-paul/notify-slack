@@ -1,6 +1,10 @@
 name: "palpaul-notify-slack"
-description: "notify-slack action"
+description: "Send beautiful Slack notifications for your GitHub Actions workflow status"
 author: 'Palash Paul'
+
+branding:
+  icon: 'bell'
+  color: 'purple'
 inputs:
   status:
     description: "The status of the job"
