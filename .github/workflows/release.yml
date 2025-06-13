@@ -1,4 +1,4 @@
-name: Go Release via Shared Template
+name: Release
 
 on:
   push:
