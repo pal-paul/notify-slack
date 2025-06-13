@@ -1,0 +1,21 @@
+name: Example Usage
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Your job steps here...
+      
+      - name: Notify Slack
+        if: always() # This ensures notification is sent regardless of previous steps
+        uses: pal-paul/notify-slack@v1.1.2  # Use the latest release tag
+        with:
+          status: ${{ job.status }}
+          notify_when: always  # or 'success' or 'failure'
+          slack_token: ${{ secrets.SLACK_TOKEN }}
+          slack_channel: your-channel-name

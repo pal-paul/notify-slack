@@ -21,7 +21,9 @@ runs:
   steps:
     - name: Run notify-slack
       shell: bash
-      run: ${{ github.action_path }}/notify-slack
+      run: |
+        chmod +x ${{ github.action_path }}/dist/notify-slack
+        ${{ github.action_path }}/dist/notify-slack
       env:
         INPUT_STATUS: ${{ inputs.status }}
         INPUT_NOTIFY_WHEN: ${{ inputs.notify_when }}

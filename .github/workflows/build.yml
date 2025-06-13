@@ -10,7 +10,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: "read"
+      contents: "write"
       id-token: "write"
     env:
       LOCATION: europe-west1
@@ -29,4 +29,15 @@ jobs:
           make install
 
       - name: Build
-        run: GOOS=linux GOARCH=amd64 go build -o .github/actions/notify-slack cmd/cmd.go
+        run: |
+          mkdir -p dist
+          GOOS=linux GOARCH=amd64 go build -o dist/notify-slack cmd/cmd.go
+          chmod +x dist/notify-slack
+
+      - name: Commit and push binary
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add dist/notify-slack
+          git commit -m "Update binary for release ${{ github.ref_name }}"
+          git push origin HEAD:${{ github.ref }}
