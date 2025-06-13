@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.7](https://github.com/pal-paul/notify-slack/compare/v1.1.6...v1.1.7) (2025-06-13)
+
+
+### Bug Fixes
+
+* missing env ([a9171f1](https://github.com/pal-paul/notify-slack/commit/a9171f10c43985871c4de1bd1146ab202c246654))
+
 ## [1.1.6](https://github.com/pal-paul/notify-slack/compare/v1.1.5...v1.1.6) (2025-06-13)
 
 
