@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/pal-paul/notify-slack/compare/v1.1.0...v1.1.1) (2025-06-13)
+
+
+### Bug Fixes
+
+* Build your binary for Linux ([d2707c4](https://github.com/pal-paul/notify-slack/commit/d2707c48b3b74ff28484e54e8adc63a1e6ab84c9))
+* Build your binary for Linux ([3d97892](https://github.com/pal-paul/notify-slack/commit/3d97892875a77e40082e1d404785c3d7c58ba8e4))
+
 ## [1.1.0](https://github.com/pal-paul/notify-slack/compare/v1.0.0...v1.1.0) (2025-06-13)
 
 
