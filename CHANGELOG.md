@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/pal-paul/notify-slack/compare/v1.3.1...v1.4.0) (2025-06-13)
+
+
+### Features
+
+* remove GitHub api call ([#26](https://github.com/pal-paul/notify-slack/issues/26)) ([81b18ce](https://github.com/pal-paul/notify-slack/commit/81b18cedf8b6749f99977ab477fe8ff2fc3ca595))
+* update readme ([#28](https://github.com/pal-paul/notify-slack/issues/28)) ([eaa6f06](https://github.com/pal-paul/notify-slack/commit/eaa6f061c942f8ed86c5e93997d883ded63ea71b))
+
 ## [1.3.1](https://github.com/pal-paul/notify-slack/compare/v1.3.0...v1.3.1) (2025-06-13)
 
 
