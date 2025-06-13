@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.0](https://github.com/pal-paul/notify-slack/compare/v1.4.0...v1.5.0) (2025-06-13)
+
+
+### Features
+
+* add action icon ([#31](https://github.com/pal-paul/notify-slack/issues/31)) ([94ee407](https://github.com/pal-paul/notify-slack/commit/94ee40728ea2c18db0135c7b684a670c77ee8146))
+* new name action.yml ([#29](https://github.com/pal-paul/notify-slack/issues/29)) ([2dd8e42](https://github.com/pal-paul/notify-slack/commit/2dd8e42b8988954e1c26c1994a344875d7cdc05d))
+
 ## [1.4.0](https://github.com/pal-paul/notify-slack/compare/v1.3.1...v1.4.0) (2025-06-13)
 
 
