@@ -10,7 +10,7 @@ import (
 
 type Environment struct {
 	GitHub struct {
-		Token    string `env:"GITHUB_TOKEN,required=true"`
+		Token    string `env:"INPUT_TOKEN,required=true"`
 		Api      string `env:"GITHUB_API_URL,required=true"`
 		Repo     string `env:"GITHUB_REPOSITORY,required=true"`
 		Workflow string `env:"GITHUB_WORKFLOW,required=true"`
@@ -68,9 +68,11 @@ type GitHubWorkflowResponse struct {
 }
 
 func GithubWorkflowUrl() string {
-	return fmt.Sprintf("%s/%s/actions",
+	// Direct workflow URL construction using environment variables
+	return fmt.Sprintf("%s/%s/actions/workflows/%s.yml",
 		envVar.GitHub.Server,
-		envVar.GitHub.Repo)
+		envVar.GitHub.Repo,
+		envVar.GitHub.Workflow)
 }
 
 func SlackMessageBuilder() slack.Message {
@@ -97,29 +99,26 @@ func SlackMessageBuilder() slack.Message {
 		},
 	})
 
-	// Construct URLs for GitHub web links (not API URLs)
 	commitUrl := fmt.Sprintf("%s/%s/commit/%s", envVar.GitHub.Server, envVar.GitHub.Repo, envVar.GitHub.Commit)
 	runUrl := fmt.Sprintf("%s/%s/actions/runs/%s", envVar.GitHub.Server, envVar.GitHub.Repo, envVar.GitHub.RunId)
-
-	// Add workflow status section
 	message.Blocks = append(message.Blocks, slack.Block{
 		Type: slack.SectionBlock,
 		Text: &slack.Text{
 			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("%s *%s*%s", icon, envVar.GitHub.Workflow, status),
-		},
-	})
-
-	// Add commit and run links section
-	message.Blocks = append(message.Blocks, slack.Block{
-		Type: slack.SectionBlock,
-		Text: &slack.Text{
-			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("• Run: <%s|%s>\n• Commit: <%s|%s>",
-				runUrl,
-				"View workflow run",
+			Text: fmt.Sprintf("%s Workflow <%s|%s>%s\nCommit: <%s|%s>",
+				icon,
+				GithubWorkflowUrl(),
+				envVar.GitHub.Workflow,
+				status,
 				commitUrl,
 				envVar.GitHub.Commit[:7]),
+		},
+	})
+	message.Blocks = append(message.Blocks, slack.Block{
+		Type: slack.SectionBlock,
+		Text: &slack.Text{
+			Type: slack.Mrkdwn,
+			Text: fmt.Sprintf("<%s|View Run>", runUrl),
 		},
 	})
 	return message
