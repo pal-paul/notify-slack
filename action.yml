@@ -1,5 +1,6 @@
 name: "notify-slack"
 description: "notify-slack action"
+author: 'Palash Paul'
 inputs:
   status:
     description: "The status of the job"
@@ -16,5 +17,21 @@ inputs:
     description: "Slack channel"
     required: true
 runs:
-  using: docker
-  image: Dockerfile
+  using: 'composite'
+  steps:
+    - name: Run notify-slack
+      shell: bash
+      run: ${{ github.action_path }}/notify-slack
+      env:
+        INPUT_STATUS: ${{ inputs.status }}
+        INPUT_NOTIFY_WHEN: ${{ inputs.notify_when }}
+        INPUT_SLACK_TOKEN: ${{ inputs.slack_token }}
+        INPUT_SLACK_CHANNEL: ${{ inputs.slack_channel }}
+        GITHUB_API_URL: ${{ github.api_url }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_WORKFLOW: ${{ github.workflow }}
+        GITHUB_SHA: ${{ github.sha }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_RUN_ID: ${{ github.run_id }}
+        GITHUB_JOB: ${{ github.job }}
