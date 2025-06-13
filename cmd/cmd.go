@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	env "github.com/pal-paul/notify-slack/pkg/env"
-	http "github.com/pal-paul/notify-slack/pkg/http-client"
-	slack "github.com/pal-paul/notify-slack/pkg/slack"
+	env "github.com/pal-paul/go-libraries/pkg/env"
+	http "github.com/pal-paul/go-libraries/pkg/http-client"
+	slack "github.com/pal-paul/go-libraries/pkg/slack"
 )
 
 type Environment struct {
@@ -35,8 +35,8 @@ type Environment struct {
 var envVar Environment
 
 var (
-	slackClient slack.SlackInterface
-	httpClient  http.HttpClientInterface
+	slackClient slack.ISlack
+	httpClient  http.IHttpClient
 )
 
 // Initializing environment variables
@@ -48,7 +48,9 @@ func init() {
 }
 
 func init() {
-	slackClient = slack.New(envVar.Slack.Token)
+	slackClient = slack.New(
+		slack.WithToken(envVar.Slack.Token),
+	)
 	httpClient = http.New()
 }
 
