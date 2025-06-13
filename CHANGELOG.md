@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/pal-paul/notify-slack/compare/v1.0.0...v1.1.0) (2025-06-13)
+
+
+### Features
+
+* use seperate libs instead of of its own ([dc47e51](https://github.com/pal-paul/notify-slack/commit/dc47e51c0c638cd434d4dfecb2efa3450cb59bd3))
+* use seperate libs instead of of its own ([2b6efa0](https://github.com/pal-paul/notify-slack/commit/2b6efa089f52f00313ab525596961d0e0e4ac09b))
+
 ## 1.0.0 (2025-05-20)
 
 
