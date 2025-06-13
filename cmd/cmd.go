@@ -103,37 +103,40 @@ func SlackMessageBuilder() slack.Message {
 	message := slack.Message{
 		Channel: envVar.Slack.Channel,
 	}
+	var status string = ""
+	var icon string = ""
+	switch envVar.Input.Status {
+	case "success":
+		icon = " :done-check: "
+		status = " succeeded "
+	case "failure":
+		icon = " :bangbang: "
+		status = " failed "
+	default:
+		icon = " :heavy_exclamation_mark: "
+	}
 	message.Blocks = append(message.Blocks, slack.Block{
 		Type: slack.HeaderBlock,
 		Text: &slack.Text{
 			Type: slack.PlainText,
-			Text: fmt.Sprintf("%s failed", envVar.GitHub.Workflow),
+			Text: fmt.Sprintf("%s%s", envVar.GitHub.Workflow, status),
 		},
 	})
 
-	var status string = ""
-	switch envVar.Input.Status {
-	case "success":
-		status = ":checked:"
-	case "failure":
-		status = ":bangbang:"
-	default:
-		status = ":heavy_exclamation_mark: "
-	}
 	commitUrl := fmt.Sprintf("%s/%s/commit/%s", envVar.GitHub.Server, envVar.GitHub.Repo, envVar.GitHub.Commit)
 	runUrl := fmt.Sprintf("%s/%s/actions/runs/%s", envVar.GitHub.Server, envVar.GitHub.Repo, envVar.GitHub.RunId)
 	message.Blocks = append(message.Blocks, slack.Block{
 		Type: slack.SectionBlock,
 		Text: &slack.Text{
 			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("%s %s %s in %s on [%s](%s) ", status, envVar.GitHub.Workflow, status, GithubWorkflowUrl(), envVar.GitHub.Commit, commitUrl),
+			Text: fmt.Sprintf("%s %s %s in %s on <%s|%s> ", icon, envVar.GitHub.Workflow, status, GithubWorkflowUrl(), commitUrl, envVar.GitHub.Commit),
 		},
 	})
 	message.Blocks = append(message.Blocks, slack.Block{
 		Type: slack.SectionBlock,
 		Text: &slack.Text{
 			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("[View Run](%s) ", runUrl),
+			Text: fmt.Sprintf("<%s|View Run>", runUrl),
 		},
 	})
 	return message
