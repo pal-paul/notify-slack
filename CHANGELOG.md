@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/pal-paul/notify-slack/compare/v1.1.2...v1.1.3) (2025-06-13)
+
+
+### Bug Fixes
+
+* build issue ([#9](https://github.com/pal-paul/notify-slack/issues/9)) ([71af593](https://github.com/pal-paul/notify-slack/commit/71af5932641118313777e1d3ee1fdb1842adc9ec))
+
 ## [1.1.2](https://github.com/pal-paul/notify-slack/compare/v1.1.1...v1.1.2) (2025-06-13)
 
 
