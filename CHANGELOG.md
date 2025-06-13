@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/pal-paul/notify-slack/compare/v1.2.0...v1.3.0) (2025-06-13)
+
+
+### Features
+
+* Removed the GitHub API call for workflow URL ([#22](https://github.com/pal-paul/notify-slack/issues/22)) ([2837f0c](https://github.com/pal-paul/notify-slack/commit/2837f0c5fd92a8f0fa67d5199a5a450ab618f598))
+
 ## [1.2.0](https://github.com/pal-paul/notify-slack/compare/v1.1.7...v1.2.0) (2025-06-13)
 
 
