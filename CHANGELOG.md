@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/pal-paul/notify-slack/compare/v1.1.7...v1.2.0) (2025-06-13)
+
+
+### Features
+
+* format slack mgs ([#20](https://github.com/pal-paul/notify-slack/issues/20)) ([2687858](https://github.com/pal-paul/notify-slack/commit/26878589d564076d45ca8c22e7c19bab7f369b37))
+
 ## [1.1.7](https://github.com/pal-paul/notify-slack/compare/v1.1.6...v1.1.7) (2025-06-13)
 
 
