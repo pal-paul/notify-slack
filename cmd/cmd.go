@@ -82,10 +82,10 @@ func SlackMessageBuilder() slack.Message {
 	switch envVar.Input.Status {
 	case "success":
 		icon = " :white_check_mark: "
-		status = " succeeded "
+		status = "succeeded"
 	case "failure":
 		icon = " :bangbang: "
-		status = " failed "
+		status = "failed"
 	default:
 		icon = " :heavy_exclamation_mark: "
 	}
@@ -93,7 +93,7 @@ func SlackMessageBuilder() slack.Message {
 		Type: slack.HeaderBlock,
 		Text: &slack.Text{
 			Type: slack.PlainText,
-			Text: fmt.Sprintf("%s%s", envVar.GitHub.Workflow, status),
+			Text: fmt.Sprintf("The GitHub Actions workflow for %s execution has %s", envVar.GitHub.Workflow, status),
 		},
 	})
 
@@ -106,7 +106,7 @@ func SlackMessageBuilder() slack.Message {
 		Type: slack.SectionBlock,
 		Text: &slack.Text{
 			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("%s *%s*%s", icon, envVar.GitHub.Workflow, status),
+			Text: fmt.Sprintf("%s *%s* has %s", icon, envVar.GitHub.Workflow, status),
 		},
 	})
 
