@@ -10,7 +10,7 @@ import (
 
 type Environment struct {
 	GitHub struct {
-		Token    string `env:"INPUT_TOKEN,required=true"`
+		Token    string `env:"GITHUB_TOKEN,required=true"`
 		Api      string `env:"GITHUB_API_URL,required=true"`
 		Repo     string `env:"GITHUB_REPOSITORY,required=true"`
 		Workflow string `env:"GITHUB_WORKFLOW,required=true"`
