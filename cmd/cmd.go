@@ -1,12 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 
 	env "github.com/pal-paul/go-libraries/pkg/env"
-	http "github.com/pal-paul/go-libraries/pkg/http-client"
 	slack "github.com/pal-paul/go-libraries/pkg/slack"
 )
 
@@ -34,10 +32,7 @@ type Environment struct {
 
 var envVar Environment
 
-var (
-	slackClient slack.ISlack
-	httpClient  http.IHttpClient
-)
+var slackClient slack.ISlack
 
 // Initializing environment variables
 func init() {
@@ -51,7 +46,6 @@ func init() {
 	slackClient = slack.New(
 		slack.WithToken(envVar.Slack.Token),
 	)
-	httpClient = http.New()
 }
 
 func main() {
@@ -74,29 +68,11 @@ type GitHubWorkflowResponse struct {
 }
 
 func GithubWorkflowUrl() string {
-	url := fmt.Sprintf("%s/repos/%s/actions/workflows", envVar.GitHub.Api, envVar.GitHub.Repo)
-	headers := map[string]string{
-		"Authorization": fmt.Sprintf("Bearer %s", envVar.GitHub.Token),
-		"Accept":        "application/vnd.github.v3+json",
-	}
-	bytes, code, err := httpClient.Get(url, headers)
-	if err != nil {
-		log.Fatalf("Error while getting workflow url: %v", err)
-	}
-	if code != 200 {
-		log.Fatalf("Error while getting workflow url: %s", string(bytes))
-	}
-	var response GitHubWorkflowResponse
-	err = json.Unmarshal(bytes, &response)
-	if err != nil {
-		log.Fatalf("Error while unmarshalling workflow url: %v", err)
-	}
-	for _, workflow := range response.Workflows {
-		if workflow.Name == envVar.GitHub.Workflow {
-			return workflow.HtmlUrl
-		}
-	}
-	return ""
+	// Direct workflow URL construction using environment variables
+	return fmt.Sprintf("%s/%s/actions/workflows/%s.yml",
+		envVar.GitHub.Server,
+		envVar.GitHub.Repo,
+		envVar.GitHub.Workflow)
 }
 
 func SlackMessageBuilder() slack.Message {
@@ -107,7 +83,7 @@ func SlackMessageBuilder() slack.Message {
 	var icon string = ""
 	switch envVar.Input.Status {
 	case "success":
-		icon = " :done-check: "
+		icon = " :white_check_mark: "
 		status = " succeeded "
 	case "failure":
 		icon = " :bangbang: "
@@ -129,7 +105,13 @@ func SlackMessageBuilder() slack.Message {
 		Type: slack.SectionBlock,
 		Text: &slack.Text{
 			Type: slack.Mrkdwn,
-			Text: fmt.Sprintf("%s %s %s in %s on <%s|%s> ", icon, envVar.GitHub.Workflow, status, GithubWorkflowUrl(), commitUrl, envVar.GitHub.Commit),
+			Text: fmt.Sprintf("%s Workflow <%s|%s>%s\nCommit: <%s|%s>",
+				icon,
+				GithubWorkflowUrl(),
+				envVar.GitHub.Workflow,
+				status,
+				commitUrl,
+				envVar.GitHub.Commit[:7]),
 		},
 	})
 	message.Blocks = append(message.Blocks, slack.Block{
