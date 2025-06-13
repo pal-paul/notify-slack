@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/pal-paul/notify-slack/compare/v1.3.0...v1.3.1) (2025-06-13)
+
+
+### Bug Fixes
+
+* use github token ([ba07cf8](https://github.com/pal-paul/notify-slack/commit/ba07cf88dcfb20838345f2cc97e6e0357b46913c))
+
 ## [1.3.0](https://github.com/pal-paul/notify-slack/compare/v1.2.0...v1.3.0) (2025-06-13)
 
 
