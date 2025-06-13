@@ -1,4 +1,4 @@
-name: "notify-slack"
+name: "palpaul-notify-slack"
 description: "notify-slack action"
 author: 'Palash Paul'
 inputs:
