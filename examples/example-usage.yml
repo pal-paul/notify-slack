@@ -19,3 +19,5 @@ jobs:
           notify_when: always  # or 'success' or 'failure'
           slack_token: ${{ secrets.SLACK_TOKEN }}
           slack_channel: your-channel-name
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
