@@ -16,6 +16,9 @@ inputs:
   slack_channel:
     description: "Slack channel"
     required: true
+  token:
+    description: "Github token"
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -37,3 +40,4 @@ runs:
         GITHUB_REF: ${{ github.ref }}
         GITHUB_RUN_ID: ${{ github.run_id }}
         GITHUB_JOB: ${{ github.job }}
+        INPUT_TOKEN: ${{ inputs.token }}
